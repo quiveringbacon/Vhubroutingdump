@@ -21,6 +21,8 @@ Write-Host "Collecting route table information for " $tablelist.Count " route ta
 $tableinfolist = @()
 foreach ($table in $tablelist) {    
     $tstrt = $table.RoutesText | ConvertFrom-Json
+    $tstassoc = $table.AssociatedConnectionsText | ConvertFrom-Json
+    $tstprop = $table.PropagatingConnectionsText | ConvertFrom-Json
     foreach ($route in $table.RoutesText) {        
         if($table.Routes.Count -eq 0) {
             $tableinfo = [PSCustomObject]@{
@@ -33,8 +35,8 @@ foreach ($table in $tablelist) {
                 NextHopType = "";
                 NextHop = "";
                 RoutesCount   = $table.Routes.Count;
-                AssociatedConnections = ($table.AssociatedConnectionsText -join ","); 
-                PropagatingConnections = ($table.PropagatingConnectionsText -join ",");
+                AssociatedConnections = ($tstassoc -join "`r`n");
+                PropagatingConnections = ($tstprop -join "`r`n");
             }
             $tableinfolist += $tableinfo
         } elseif ($table.Routes.Count -gt 0) {
@@ -49,8 +51,8 @@ foreach ($table in $tablelist) {
                 NextHopType = $rt.NextHopType;
                 NextHop = $rt.NextHop;
                 RoutesCount   = $table.Routes.Count;
-                AssociatedConnections = ($table.AssociatedConnectionsText -join ","); 
-                PropagatingConnections = ($table.PropagatingConnectionsText -join ",");
+                AssociatedConnections = ($tstassoc -join "`r`n");
+                PropagatingConnections = ($tstprop -join "`r`n");
                 }
                 $tableinfolist += $tableinfo
             }
