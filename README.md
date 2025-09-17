@@ -1,7 +1,7 @@
 # Vhub routing dump
 Dumps most vhub routes to CSV files for checking
 
-Hello all, this is a powershell script to dump pretty much all the available vhub routing information to .csv files for troubleshooting purposes.
+This is a powershell script to dump pretty much all the available vhub routing information to .csv files for troubleshooting purposes.
 It'll prompt you for some info on resource group and hub name then take off and save whatever it can find to the folder given (default is "c:\temp\vwanrouting")
 You'll end up with several files like this:
 
